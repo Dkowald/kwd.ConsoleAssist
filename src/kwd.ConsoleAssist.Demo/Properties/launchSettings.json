@@ -1,0 +1,9 @@
+{
+  "profiles": {
+    "kwd.Cli.Demo": {
+      "commandName": "Project",
+      "commandLineArgs": "shell --echo=a",
+      "workingDirectory": "./"
+    }
+  }
+}

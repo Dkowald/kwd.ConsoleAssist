@@ -1,0 +1,48 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{008085B1-1169-430D-87D7-989CBBD60285}"
+	ProjectSection(SolutionItems) = preProject
+		..\ReadMe.md = ..\ReadMe.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.ConsoleAssist", "..\..\..\..\Users\Derek\Source\kwd\CliAssist\src\kwd.ConsoleAssist\kwd.ConsoleAssist.csproj", "{4AF5517E-1D0D-43D6-93F0-3A02F5059086}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.ConsoleAssist.Demo", "..\..\..\..\Users\Derek\Source\kwd\CliAssist\src\kwd.ConsoleAssist.Demo\kwd.ConsoleAssist.Demo.csproj", "{14EBAC6B-95F4-4DF4-9D1B-6866BEC7D2A0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.ConsoleAssist.Doc", "..\..\..\..\Users\Derek\Source\kwd\CliAssist\src\kwd.ConsoleAssist.Doc\kwd.ConsoleAssist.Doc.csproj", "{9D571DC2-2EBC-4564-AD65-28079F87E7F7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "kwd.ConsoleAssist.Tests", "..\..\..\..\Users\Derek\Source\kwd\CliAssist\src\kwd.ConsoleAssist.Tests\kwd.ConsoleAssist.Tests.csproj", "{7B5BEF63-703C-4CE5-9773-B4D9F1CF17DE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4AF5517E-1D0D-43D6-93F0-3A02F5059086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AF5517E-1D0D-43D6-93F0-3A02F5059086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AF5517E-1D0D-43D6-93F0-3A02F5059086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AF5517E-1D0D-43D6-93F0-3A02F5059086}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14EBAC6B-95F4-4DF4-9D1B-6866BEC7D2A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14EBAC6B-95F4-4DF4-9D1B-6866BEC7D2A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14EBAC6B-95F4-4DF4-9D1B-6866BEC7D2A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14EBAC6B-95F4-4DF4-9D1B-6866BEC7D2A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D571DC2-2EBC-4564-AD65-28079F87E7F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D571DC2-2EBC-4564-AD65-28079F87E7F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D571DC2-2EBC-4564-AD65-28079F87E7F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D571DC2-2EBC-4564-AD65-28079F87E7F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B5BEF63-703C-4CE5-9773-B4D9F1CF17DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B5BEF63-703C-4CE5-9773-B4D9F1CF17DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B5BEF63-703C-4CE5-9773-B4D9F1CF17DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B5BEF63-703C-4CE5-9773-B4D9F1CF17DE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9695939D-BAF2-457A-A84B-1365A69C8972}
+	EndGlobalSection
+EndGlobal

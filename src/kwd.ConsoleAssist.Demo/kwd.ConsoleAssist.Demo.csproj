@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>CS8600;CS8602;CS8603</WarningsAsErrors>
+
+    <!--needed for run-time compile.-->
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="morelinq" Version="3.2.0" />
+    <PackageReference Include="kwd.CoreUtil" Version="1.0.0-alpha-1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\kwd.ConsoleAssist\kwd.ConsoleAssist.csproj" />
+  </ItemGroup>
+
+</Project>
