@@ -1,5 +1,4 @@
-﻿using kwd.Cli.Tests.TestHelpers;
-using kwd.ConsoleAssist.Tests.TestHelpers;
+﻿using kwd.ConsoleAssist.Tests.TestHelpers;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace kwd.ConsoleAssist.Tests
@@ -13,8 +12,8 @@ namespace kwd.ConsoleAssist.Tests
             var target = TestHelper.DemoSettings;
     
             var result = target.Build();
-
-            //Assert.AreEqual(typeof(_DemoCli), result.Wrapper);
+            
+            Assert.AreEqual(typeof(_DemoCli), result.Wrapper);
         }
     }
 }

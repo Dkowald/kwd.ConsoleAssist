@@ -4,21 +4,29 @@ using Microsoft.Extensions.Configuration;
 
 namespace kwd.ConsoleAssist.Configuration
 {
+    /// <summary>
+    /// Command line configuration; that can be updated at run-time.
+    /// </summary>
     public class UpdatableCommandLineSource : IConfigurationSource
     {
-        public IDictionary<string, string> SwitchMappings { get; set; }
-        public IEnumerable<string> Args { get; set; }
+        private readonly IDictionary<string, string>? _switchMappings;
+        private readonly IEnumerable<string> _args;
 
-        public UpdatableCommandLineSource(IEnumerable<string>? args, IDictionary<string, string>? switchMappings)
+        /// <summary>
+        /// Create new <see cref="UpdatableCommandLineSource"/>.
+        /// See <see cref="UpdatableCommandLineProvider"/>.
+        /// </summary>
+        public UpdatableCommandLineSource(IEnumerable<string>? args, 
+            IDictionary<string, string>? switchMappings)
         {
-            Args = args ?? Array.Empty<string>();
-            SwitchMappings = switchMappings ?? new Dictionary<string, string>();
+            _args = args ?? Array.Empty<string>();
+            _switchMappings = switchMappings;
         }
 
         ///<inheritdoc />
         public IConfigurationProvider Build(IConfigurationBuilder builder)
         {
-            return new UpdatableCommandLineProvider(Args, SwitchMappings);
+            return new UpdatableCommandLineProvider(_args, _switchMappings);
         }
     }
 }

@@ -22,11 +22,14 @@ namespace kwd.ConsoleAssist.Engine
         private readonly ILogger<CliModelEngine> _log;
         private readonly IHostApplicationLifetime _life;
         private readonly CommandLineWrapper _wrapper;
-        private readonly DefaultCommandLine _callerConfig;
+        private readonly ICommandLineArguments _callerConfig;
         private readonly IConsole _con;
 
         private readonly UpdatableCommandLineProvider? _updatableCommandLineProvider;
 
+        /// <summary>
+        /// Create command line hosted service engine.
+        /// </summary>
         public CliModelEngine(IServiceProvider cont,
             ILogger<CliModelEngine> log,
             IHostApplicationLifetime life,
@@ -43,7 +46,7 @@ namespace kwd.ConsoleAssist.Engine
             
             _con = con;
 
-            _callerConfig = (DefaultCommandLine)callerConfig;
+            _callerConfig = (DefaultCommandLineArguments)callerConfig;
 
             _updatableCommandLineProvider =
                 ((IConfigurationRoot) configRoot).Providers.OfType<UpdatableCommandLineProvider>()
@@ -71,7 +74,7 @@ namespace kwd.ConsoleAssist.Engine
                 _callerConfig.Start();
 
                 var result = (int?) await cli.Execute(
-                                 _callerConfig.PositionalArguments(), cancellationToken)
+                                 _callerConfig.PositionalArguments, cancellationToken)
                     ?? _wrapper.Settings.DefaultExitCode;
 
                 _callerConfig.Finish();

@@ -1,0 +1,3 @@
+#!/bin/bash
+app=./bin/Debug/netcoreapp3.1/kwd.ConsoleAssist.Demo.exe
+$app $@

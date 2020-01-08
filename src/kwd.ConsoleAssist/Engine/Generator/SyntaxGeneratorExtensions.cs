@@ -8,6 +8,9 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace kwd.ConsoleAssist.Engine.Generator
 {
+    /// <summary>
+    /// Utility helpers for SyntaxGenerator.
+    /// </summary>
     public static class SyntaxGeneratorExtensions
     {
         /// <summary>Code to assign parameters to corresponding fields.</summary>
@@ -24,6 +27,9 @@ namespace kwd.ConsoleAssist.Engine.Generator
             });
         }
         
+        /// <summary>
+        /// Creates member access expression
+        /// </summary>
         public static SyntaxNode MemberAccessExpression(this SyntaxGenerator gen, string who, string memberName)
             => gen.MemberAccessExpression(gen.IdentifierName(who), memberName);
 
@@ -31,6 +37,9 @@ namespace kwd.ConsoleAssist.Engine.Generator
         public static SyntaxNode TaskReturnNullInt(this SyntaxGenerator Gen) =>
             Gen.TaskReturn(Gen.NullLiteralExpression());
 
+        /// <summary>
+        /// Task.FromResult&lt;int?&gt; with expression that returns int.
+        /// </summary>
         public static SyntaxNode TaskReturn(this SyntaxGenerator Gen, SyntaxNode node) =>
             Gen.InvocationExpression(
                 Gen.MemberAccessExpression(

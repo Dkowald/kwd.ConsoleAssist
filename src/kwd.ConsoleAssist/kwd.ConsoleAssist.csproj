@@ -12,8 +12,8 @@
     <Title>KWD .NET Console project assistant</Title>
     <Product>KWD ConsoleAssist</Product>
     <Description>.NET library to ease development of console applications.</Description>
-    <PackageProjectUrl>https://github.com/Dkowald/kwd.CoreUtil</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Dkowald/kwd.CoreUtil.git</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/Dkowald/kwd.ConsoleAssist</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Dkowald/kwd.ConsoleAssist.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Tags>.NET Core;Console</Tags>
@@ -21,7 +21,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="icon.svg" Pack="true" PackagePath="\"/>
+    <None Include="icon.svg" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

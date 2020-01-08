@@ -2,8 +2,8 @@
 {
     public class AppConfig
     {
-        public string? Directory { get; set; }
+        public bool? Verbose { get; set; }
 
-        public string? Echo { get; set; }
+        public string? PackageName { get; set; }
     }
 }

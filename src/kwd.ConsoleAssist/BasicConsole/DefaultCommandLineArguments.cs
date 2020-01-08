@@ -1,13 +1,19 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace kwd.ConsoleAssist.Engine
+namespace kwd.ConsoleAssist.BasicConsole
 {
-    public class DefaultCommandLine : ICommandLineArguments
+    /// <summary>
+    /// Default implementation for <see cref="ICommandLineArguments"/>
+    /// </summary>
+    public class DefaultCommandLineArguments : ICommandLineArguments
     {
         private readonly List<string[]> _history = new List<string[]>();
         
-        public DefaultCommandLine(string[] initialArgs)
+        /// <summary>
+        /// Create command line arguments with initial value(s).
+        /// </summary>
+        public DefaultCommandLineArguments(string[] initialArgs)
         {
             Next = initialArgs;
 
@@ -31,9 +37,13 @@ namespace kwd.ConsoleAssist.Engine
             _history.Add(Current);
         }
 
-        public string[] PositionalArguments() =>
-            Current.Where(x => !x.StartsWith('-')).ToArray();
+        /// <inheritdoc />
+        public string[] PositionalArguments =>
+            Current.Where(x => !x.StartsWith('-'))
+                .Select(x => x.ToLower())
+                .ToArray();
 
+        /// <inheritdoc />
         public void SetNext(string args)
         {
             Next = args.Split(null)

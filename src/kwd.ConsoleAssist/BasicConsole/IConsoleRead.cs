@@ -3,6 +3,9 @@ using System.Threading;
 
 namespace kwd.ConsoleAssist.BasicConsole
 {
+    /// <summary>
+    /// Standard console input stream.
+    /// </summary>
     public interface IConsoleRead
     {
         /// <summary>

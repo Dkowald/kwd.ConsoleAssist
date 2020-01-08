@@ -7,6 +7,9 @@ using MoreLinq.Extensions;
 
 namespace kwd.ConsoleAssist.Engine.Generator
 {
+    /// <summary>
+    /// Extension to simplify reading run time type info.
+    /// </summary>
     public static class TypeHelper
     {
         static readonly BindingFlags ActionMethodFlags =
@@ -33,13 +36,6 @@ namespace kwd.ConsoleAssist.Engine.Generator
         /// </summary>
         public static bool IsTask(this Type type) =>
             typeof(Task).IsAssignableFrom(type);
-
-        public static bool IsInt(this Type type) 
-            => type == typeof(int);
-
-        /// <summary>Task&lt;int?&gt;</summary>
-        public static bool IsNullIntTask(this Type type)
-             => type == typeof(Task<int?>);
 
         /// <summary>
         /// Unwrap Type&lt;T&gt; (return self if not Task).

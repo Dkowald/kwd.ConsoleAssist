@@ -1,24 +1,37 @@
 ﻿using System;
 using System.IO;
 
+using kwd.ConsoleAssist.BasicConsole;
 using kwd.ConsoleAssist.Engine;
 using kwd.ConsoleAssist.Engine.Generator;
 using kwd.CoreUtil.FileSystem;
 
 namespace kwd.ConsoleAssist
 {
+    /// <summary>
+    /// Settings for generating command line wrapper.
+    /// </summary>
     public class EngineSettings
     {
+        /// <summary>
+        /// Default namespace for in-memory generated class.
+        /// </summary>
         public const string DefaultInMemoryNamespace = "CLI_GENERATED";
 
-        public const string DefaultGeneratedFileExtension = ".cli.cs";
+        /// <summary>
+        /// Extension for generates class.
+        /// </summary>
+        public const string DefaultGeneratedFileExtension = ".cli.generated.cs";
 
-        public static DirectoryInfo GetDefaultSourceRoot(Type model) =>
+        private static DirectoryInfo GetDefaultSourceRoot(Type model) =>
             new DirectoryInfo(
                 Path.Combine(
                 Path.GetDirectoryName(model.Assembly.Location) ??
                 throw new Exception("Cannot resolve default source root"),"../../../"));
 
+        /// <summary>
+        /// Create settings with app model and project root namespace.
+        /// </summary>
         public EngineSettings(Type model, string projectBaseNamespace)
         :this(model, projectBaseNamespace, GetDefaultSourceRoot(model)){}
 
@@ -54,6 +67,9 @@ namespace kwd.ConsoleAssist
         /// </summary>
         public FileInfo? GeneratedOutput { get; set; }
 
+        /// <summary>
+        /// Namespace for in-memory generated wrapper 
+        /// </summary>
         public string InMemoryNamespace { get; set; } = DefaultInMemoryNamespace;
 
         /// <summary>
@@ -101,6 +117,5 @@ namespace kwd.ConsoleAssist
 
             return root.GetFile(Model.Name + DefaultGeneratedFileExtension);
         }
-
     }
 }

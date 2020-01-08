@@ -2,6 +2,9 @@
 
 namespace kwd.ConsoleAssist.BasicConsole
 {
+    /// <summary>
+    /// Set console colors, reverting to current on dispose.
+    /// </summary>
     public class TempColor : IDisposable
     {
         private readonly ConsoleColor _font;
@@ -19,7 +22,10 @@ namespace kwd.ConsoleAssist.BasicConsole
         public static TempColor Red()=>
             new TempColor(Console.BackgroundColor, ConsoleColor.Red);
         
-        public TempColor(ConsoleColor? font, ConsoleColor? background)
+        /// <summary>
+        /// Assign text and background color to console.
+        /// </summary>
+        public TempColor(ConsoleColor? font, ConsoleColor? background = null)
         {
             _font = Console.ForegroundColor;
             _background = Console.BackgroundColor;
@@ -28,9 +34,9 @@ namespace kwd.ConsoleAssist.BasicConsole
             Console.BackgroundColor = background ?? _background;
         }
 
-        public TempColor(ConsoleColor font):this(font, Console.BackgroundColor){}
-
-        /// <inheritdoc />
+        /// <summary>
+        /// Revert to previous colors.
+        /// </summary>
         public void Dispose()
         {
             Console.ForegroundColor = _font;

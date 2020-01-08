@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -25,6 +26,9 @@ namespace kwd.ConsoleAssist.Engine.Generator
         /// </summary>
         public static string WrapperClassName(Type type) =>"_" + type.Name;
 
+        /// <summary>
+        /// Create roslyn based generator.
+        /// </summary>
         public WrapperClassGenerator(Context ctx){
             _ctx = ctx;
             Gen = ctx.Gen;
@@ -235,7 +239,6 @@ namespace kwd.ConsoleAssist.Engine.Generator
         /// <summary>
         /// parameters for actions and command methods.
         /// </summary>
-        /// <returns></returns>
         private SyntaxNode[] OpArgs() => new[]
         {
            Gen.ParameterDeclaration("args", _ctx.PositionArgs()),

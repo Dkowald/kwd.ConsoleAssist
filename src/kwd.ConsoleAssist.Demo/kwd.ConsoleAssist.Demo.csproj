@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -11,12 +11,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.0.0" />
     <PackageReference Include="morelinq" Version="3.2.0" />
     <PackageReference Include="kwd.CoreUtil" Version="1.0.0-alpha-1" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\kwd.ConsoleAssist\kwd.ConsoleAssist.csproj" />
   </ItemGroup>
+
+  <Target Name="createRunScript" AfterTargets="Build">
+    <!--Create simple shell script to execute built exe-->
+    <ItemGroup>
+      <Line Include="#!/bin/bash" />
+      <Line Include="app=./bin/$(Configuration)/$(TargetFramework)/$(AssemblyName).exe" />
+      <Line Include="$app $@" />
+    </ItemGroup>
+
+    <WriteLinesToFile File="run" Lines="@(Line)" Overwrite="true" />
+  </Target>
 
 </Project>

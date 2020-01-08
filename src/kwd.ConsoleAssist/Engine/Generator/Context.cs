@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using kwd.ConsoleAssist.Engine.Errors;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,18 +9,33 @@ using Microsoft.CodeAnalysis.Editing;
 
 namespace kwd.ConsoleAssist.Engine.Generator
 {
+    /// <summary>
+    /// Group syntax generator and compiler for code generation.
+    /// </summary>
     public class Context
     {
+        /// <summary>
+        /// Create code generator context.
+        /// </summary>
         public Context(SyntaxGenerator gen, CSharpCompilation compiler)
         {
             Gen = gen;
             Compiler = compiler;
         }
 
+        /// <summary>
+        /// Syntax generator
+        /// </summary>
         public readonly SyntaxGenerator Gen;
+
+        /// <summary>
+        /// Compiler
+        /// </summary>
         public readonly CSharpCompilation Compiler;
 
-        //todo: fix for closed generics.
+        /// <summary>
+        /// Name syntax for specified type
+        /// </summary>
         public NameSyntax TypeRef(Type t)
         {
             NameSyntax typeName;
@@ -59,13 +75,16 @@ namespace kwd.ConsoleAssist.Engine.Generator
             {
                 typeName = (NameSyntax)Gen.TypeExpression(
                     Compiler.GetTypeByMetadataName(t.FullName) ??
-                    throw new Exception($"Unresolvable type: {t.Name}")
+                        throw new GetTypeRefError(t)
                 );
             }
 
             return typeName;
         }
 
+        /// <summary>
+        /// Name syntax for specified type.
+        /// </summary>
         public SyntaxNode TypeRef<T>() => TypeRef(typeof(T));
 
         /// <summary>
@@ -74,18 +93,5 @@ namespace kwd.ConsoleAssist.Engine.Generator
         /// </summary>
         public SyntaxNode PositionArgs() => 
             TypeRef<ArraySegment<string>>();
-        
-        /// <summary>
-        /// place holder code for todo exception.
-        /// </summary>
-        public SyntaxNode[] Todo()
-        {
-            return new []{
-                Gen.ThrowStatement(
-                Gen.ObjectCreationExpression(
-                    TypeRef<NotImplementedException>())
-                )
-            };
-        }
     }
 }

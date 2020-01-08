@@ -12,13 +12,14 @@ Create a.NET console app.
 dotnet new console
 ```
 
-Create Your app class with a void Run() method.
+Create Your app class with a int Run() method.
 
 ```c#
 namespace myProject.App{
     public class MyApp{
-        public void Run(){
+        public int Run(){
           Console.WriteLine("Hellow Console Assist");
+          return 0;
 	    }
     }
 }
@@ -28,7 +29,7 @@ Create and start .NET Generic host and run
 ```c#
 using kwd.ConsoleAssist;
 
-public static void Main(string[] args) {
+public static async void Main(string[] args) {
 
     //The root console app; and the project base namespace.
     var settings = new EngineSettings(typeof(MyApp), "myProject");
@@ -52,7 +53,6 @@ public static void Main(string[] args) {
     host.ConfigureCommandLine(wrapper, args);
 
     //Run as console.
-    host.RunConsoleAsync();
+    await host.RunConsoleAsync();
 }
-
 ```

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace kwd.ConsoleAssist.BasicConsole
 {
+    /// <summary>
+    /// Implement a console.
+    /// </summary>
     public class DefaultConsole : IConsole
     {
         /// <inheritdoc />
@@ -14,12 +17,14 @@ namespace kwd.ConsoleAssist.BasicConsole
         /// <inheritdoc />
         public IConsoleStream Error { get; } = new ConsoleStream(Console.Error);
 
+        /// <inheritdoc />
         public IConsoleRead Read => new ConsolePrompt();
 
-        public IDisposable Color(ConsoleColor font, ConsoleColor? background) =>
-            new TempColor(font, background ?? Console.BackgroundColor);
+        /// <inheritdoc />
+        public IDisposable Color(ConsoleColor font, ConsoleColor? background = null) =>
+            new TempColor(font, background);
 
-        public class ConsoleStream : IConsoleStream
+        private class ConsoleStream : IConsoleStream
         {
             private readonly TextWriter _wr;
             public ConsoleStream(TextWriter wr)
@@ -42,7 +47,7 @@ namespace kwd.ConsoleAssist.BasicConsole
             }
         }
 
-        public class ConsolePrompt : IConsoleRead
+        private class ConsolePrompt : IConsoleRead
         {
             /// <inheritdoc />
             public ConsoleKeyInfo ReadKey(CancellationToken cancel, bool intercept = false)

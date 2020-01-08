@@ -1,64 +1,88 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using kwd.Cli;
+
 using kwd.ConsoleAssist.BasicConsole;
 using kwd.ConsoleAssist.Demo.App;
 using kwd.ConsoleAssist.Engine;
+
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace kwd.ConsoleAssist.Demo
 {
-    class Program
+    public class Program
     {
-        static async Task<int> Main(string[] args)
+        static async Task Main(string[] args)
         {
+            var wrapper = CreateWrapper();
+
+            //Create generic host.
             var host = Host.CreateDefaultBuilder();
 
+            //Use Updatable command line source.
             host.ConfigureAppConfiguration(x =>
                 x.AddUpdatableCommandLine(args, new Dictionary<string, string>
                 {
-                    {"-d", "Directory"},
+                    //add short-form options as normal.
+                    {"-v", nameof(AppConfig.Verbose) }
                 })
             );
 
-            host.ConfigureCommandLine(CreateWrapper(), args);
+            //use environment prefix.
+            host.ConfigureAppConfiguration(cfg =>
+                cfg.AddEnvironmentVariables("DEMO_")
+            );
 
+            //Add console execution engine.
+            host.ConfigureCommandLine(wrapper, args);
+
+            //Add config option to host.
             host.ConfigureServices((ctx, svc) =>
             {
-                //application services
                 svc.AddOptions()
                     .Configure<AppConfig>(ctx.Configuration);
 
                 svc.AddSingleton<IConsole, DefaultConsole>();
             });
+            
+            //Add application service(s)
+            host.ConfigureServices( (ctx, svc) =>
+            {
+                svc.AddSingleton<AppSession>();
+            });
+
+            host.ConfigureServices((ctx, svc) =>
+            {
+                svc.AddHttpClient();
+            });
 
             try
             {
+                //Run as console.
                 await host.RunConsoleAsync();
             }
             catch (OperationCanceledException)
             {
-                //ctl-c (or something that requested process die).
+                /*eat ctl-c*/
+                Environment.ExitCode = 130;
             }
-
-            return Environment.ExitCode;
         }
 
-        public static CommandLineWrapper CreateWrapper()
+        private static CommandLineWrapper CreateWrapper()
         {
-            //the engine settings.
-            var settings = new EngineSettings(typeof(App.Demo), "kwd.Cli.Demo");
+            var settings = new EngineSettings(typeof(MyApp),
+                typeof(Program).Namespace ?? 
+                throw new Exception("Missing root namespace"));
             
-            //return settings.Build();
-
-            //Build for debug or not.
-            #if DEBUG
-            return settings.BuildDebug();
+            #if DEBUG 
+            var wrapper = settings.BuildDebug();
             #else
-            retrun settings.Build();
+            var wrapper = settings.Build();
             #endif
+            
+            return wrapper;
         }
     }
 }

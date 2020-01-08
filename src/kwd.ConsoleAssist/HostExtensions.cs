@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using kwd.ConsoleAssist.BasicConsole;
 using kwd.ConsoleAssist.Configuration;
 using kwd.ConsoleAssist.Engine;
 
@@ -9,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 
 namespace kwd.ConsoleAssist
 {
+    /// <summary>
+    /// Helpers to simplify registration
+    /// </summary>
     public static class HostExtensions
     {
         /// <summary>
@@ -19,16 +22,18 @@ namespace kwd.ConsoleAssist
         /// Use <see cref="EngineSettings"/> to create wrapper class.
         /// </param>
         /// <param name="args">Command line input</param>
-        /// <returns></returns>
         public static IHostBuilder ConfigureCommandLine(this IHostBuilder builder, CommandLineWrapper wrapper, string[] args)
             => builder.ConfigureServices((ctx, svc) =>
             {
                 //The processing engine.
                 svc.AddSingleton(wrapper)
-                    .AddSingleton<ICommandLineArguments>(new DefaultCommandLine(args))
+                    .AddSingleton<ICommandLineArguments>(new DefaultCommandLineArguments(args))
                     .AddHostedService<CliModelEngine>();
             });
 
+        /// <summary>
+        /// Add <see cref="UpdatableCommandLineSource"/> to support interactive console.
+        /// </summary>
         public static IConfigurationBuilder AddUpdatableCommandLine(
             this IConfigurationBuilder configurationBuilder,
             string[] args, IDictionary<string, string> switchMappings)
