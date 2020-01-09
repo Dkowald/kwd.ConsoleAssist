@@ -55,7 +55,9 @@ namespace Demo
     public static async Task Main()
     {
       //Create wrapper
-      var settings = new EngineSettings(typeof(MyApp));
+      var settings = new EngineSettings(typeof(MyApp)
+            typeof(Program).Namespace ?? 
+            throw new Exception("Missing root namespace"));
 
       var wrapper = settings.BuildDebug();
 

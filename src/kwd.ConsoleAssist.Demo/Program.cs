@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-using kwd.ConsoleAssist.BasicConsole;
 using kwd.ConsoleAssist.Demo.App;
 using kwd.ConsoleAssist.Engine;
 
@@ -43,8 +42,6 @@ namespace kwd.ConsoleAssist.Demo
             {
                 svc.AddOptions()
                     .Configure<AppConfig>(ctx.Configuration);
-
-                svc.AddSingleton<IConsole, DefaultConsole>();
             });
             
             //Add application service(s)

@@ -22,12 +22,14 @@ namespace kwd.ConsoleAssist
         /// Use <see cref="EngineSettings"/> to create wrapper class.
         /// </param>
         /// <param name="args">Command line input</param>
-        public static IHostBuilder ConfigureCommandLine(this IHostBuilder builder, CommandLineWrapper wrapper, string[] args)
+        public static IHostBuilder ConfigureCommandLine(this IHostBuilder builder, 
+            CommandLineWrapper wrapper, string[] args)
             => builder.ConfigureServices((ctx, svc) =>
             {
                 //The processing engine.
                 svc.AddSingleton(wrapper)
                     .AddSingleton<ICommandLineArguments>(new DefaultCommandLineArguments(args))
+                    .AddSingleton<IConsole, DefaultConsole>()
                     .AddHostedService<CliModelEngine>();
             });
 
