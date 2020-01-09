@@ -17,11 +17,13 @@
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Tags>.NET Core;Console</Tags>
-    <PackageIcon>icon.svg</PackageIcon>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageTags>Console;Generic Host</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="icon.svg" Pack="true" PackagePath="\" />
+    <None Include="icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>
