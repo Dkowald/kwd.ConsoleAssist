@@ -128,8 +128,6 @@ namespace kwd.ConsoleAssist.Engine
                 SyntaxFactory.CarriageReturnLineFeed,
                 SyntaxFactory.Comment("//From: " + _settings.Model.FullName),
                 SyntaxFactory.CarriageReturnLineFeed,
-                SyntaxFactory.Comment("//At: " + DateTime.UtcNow.ToString("o")),
-                SyntaxFactory.CarriageReturnLineFeed,
                 SyntaxFactory.Comment("// <generated>"),
                 SyntaxFactory.CarriageReturnLineFeed,
                 SyntaxFactory.Comment("// </generated>"),
