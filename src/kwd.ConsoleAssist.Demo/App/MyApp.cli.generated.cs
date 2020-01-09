@@ -31,8 +31,8 @@ namespace kwd.ConsoleAssist.Demo.App
                     return WithArg(args.Slice(1), cancel);
                 case "login":
                     return Login(args.Slice(1), cancel);
-                case "latest":
-                    return Latest(args.Slice(1), cancel);
+                case "nuget":
+                    return NuGet(args.Slice(1), cancel);
                 default:
                     return Run(args, cancel);
             }
@@ -77,18 +77,6 @@ namespace kwd.ConsoleAssist.Demo.App
             }
         }
 
-        public async Task<int?> Latest(ArraySegment<string> args, CancellationToken cancel)
-        {
-            switch (args.Count)
-            {
-                case 0:
-                    await _model.Latest();
-                    return null;
-                default:
-                    throw new Exception("Extra arguments found");
-            }
-        }
-
         public async Task<int?> Sub1(ArraySegment<string> args, CancellationToken cancel)
         {
             global::kwd.ConsoleAssist.Demo.App.MySubCommand model = _model.Sub1(global::Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance<global::kwd.ConsoleAssist.Demo.App.MySubCommand>(_container));
@@ -99,6 +87,12 @@ namespace kwd.ConsoleAssist.Demo.App
         {
             global::kwd.ConsoleAssist.Demo.App.MyShell model = _model.Login(global::Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance<global::kwd.ConsoleAssist.Demo.App.MyShell>(_container));
             return await (new _MyShell(_container, model)).Execute(args, cancel);
+        }
+
+        public async Task<int?> NuGet(ArraySegment<string> args, CancellationToken cancel)
+        {
+            global::kwd.ConsoleAssist.Demo.App.NuGet model = _model.NuGet(global::Microsoft.Extensions.DependencyInjection.ActivatorUtilities.CreateInstance<global::kwd.ConsoleAssist.Demo.App.NuGet>(_container));
+            return await (new _NuGet(_container, model)).Execute(args, cancel);
         }
 
         public partial class _MySubCommand
@@ -189,6 +183,41 @@ namespace kwd.ConsoleAssist.Demo.App
                         cancel.ThrowIfCancellationRequested();
                         _model.SetPwd(cancel);
                         return Task.FromResult<int?>(null);
+                    default:
+                        throw new Exception("Extra arguments found");
+                }
+            }
+        }
+
+        public partial class _NuGet
+        {
+            private readonly IServiceProvider _container;
+            private readonly global::kwd.ConsoleAssist.Demo.App.NuGet _model;
+            public _NuGet(IServiceProvider container, global::kwd.ConsoleAssist.Demo.App.NuGet model)
+            {
+                _container = (container);
+                _model = (model);
+            }
+
+            public Task<int?> Execute(ArraySegment<string> args, CancellationToken cancel)
+            {
+                switch (args.FirstOrDefault())
+                {
+                    case "latest":
+                        return Latest(args.Slice(1), cancel);
+                    default:
+                        throw new Exception("Extra arguments found");
+                }
+            }
+
+            public async Task<int?> Latest(ArraySegment<string> args, CancellationToken cancel)
+            {
+                switch (args.Count)
+                {
+                    case 1:
+                        return await _model.Latest(args.ElementAt(0));
+                    case 0:
+                        return await _model.Latest();
                     default:
                         throw new Exception("Extra arguments found");
                 }
