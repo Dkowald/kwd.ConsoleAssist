@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+
 using kwd.ConsoleAssist.Engine.Errors;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -17,10 +19,12 @@ namespace kwd.ConsoleAssist.Engine.Generator
         /// <summary>
         /// Create code generator context.
         /// </summary>
-        public Context(SyntaxGenerator gen, CSharpCompilation compiler)
+        public Context(SyntaxGenerator gen, 
+            CSharpCompilation compiler, EngineSettings settings)
         {
             Gen = gen;
             Compiler = compiler;
+            Settings = settings;
         }
 
         /// <summary>
@@ -32,6 +36,9 @@ namespace kwd.ConsoleAssist.Engine.Generator
         /// Compiler
         /// </summary>
         public readonly CSharpCompilation Compiler;
+
+        /// <summary>Engine settings used for configuration</summary>
+        public readonly EngineSettings Settings;
 
         /// <summary>
         /// Name syntax for specified type

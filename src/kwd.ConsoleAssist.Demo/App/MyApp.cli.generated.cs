@@ -46,7 +46,7 @@ namespace kwd.ConsoleAssist.Demo.App
                     cancel.ThrowIfCancellationRequested();
                     return Task.FromResult<int?>(_model.Run());
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -58,7 +58,7 @@ namespace kwd.ConsoleAssist.Demo.App
                     cancel.ThrowIfCancellationRequested();
                     return Task.FromResult<int?>(_model.Version());
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -73,7 +73,7 @@ namespace kwd.ConsoleAssist.Demo.App
                     cancel.ThrowIfCancellationRequested();
                     return Task.FromResult<int?>(_model.WithArg(args.ElementAt(0)));
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -122,7 +122,7 @@ namespace kwd.ConsoleAssist.Demo.App
                         cancel.ThrowIfCancellationRequested();
                         return Task.FromResult<int?>(_model.Run());
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(11);
                 }
             }
         }
@@ -158,7 +158,7 @@ namespace kwd.ConsoleAssist.Demo.App
                         cancel.ThrowIfCancellationRequested();
                         return Task.FromResult<int?>(_model.Run());
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(11);
                 }
             }
 
@@ -171,7 +171,7 @@ namespace kwd.ConsoleAssist.Demo.App
                         _model.SetName(args.ElementAt(0));
                         return Task.FromResult<int?>(null);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(11);
                 }
             }
 
@@ -184,7 +184,7 @@ namespace kwd.ConsoleAssist.Demo.App
                         _model.SetPwd(cancel);
                         return Task.FromResult<int?>(null);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(11);
                 }
             }
         }
@@ -206,7 +206,7 @@ namespace kwd.ConsoleAssist.Demo.App
                     case "latest":
                         return Latest(args.Slice(1), cancel);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(10);
                 }
             }
 
@@ -219,7 +219,7 @@ namespace kwd.ConsoleAssist.Demo.App
                     case 0:
                         return await _model.Latest();
                     default:
-                        throw new Exception("Extra arguments found");
+                        return 11;
                 }
             }
         }

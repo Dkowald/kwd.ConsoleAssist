@@ -3,7 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
+
 using kwd.ConsoleAssist.Engine.Generator;
+
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -43,7 +45,7 @@ namespace kwd.ConsoleAssist.Engine
                 options: options,
                 references: GetDependencies());
 
-            _ctx = new Context(Gen, Compiler);
+            _ctx = new Context(Gen, Compiler, settings);
         }
         
         /// <summary>

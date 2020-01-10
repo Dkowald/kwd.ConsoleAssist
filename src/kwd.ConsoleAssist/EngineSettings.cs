@@ -73,6 +73,18 @@ namespace kwd.ConsoleAssist
         public string InMemoryNamespace { get; set; } = DefaultInMemoryNamespace;
 
         /// <summary>
+        /// Error reported if cannot locate command method.
+        /// </summary>
+        public ReportError UnknownCommand { get; set; } =
+            new ReportError(10, "ERROR (10): Unknown command");
+
+        /// <summary>
+        /// Error reported for argument count mismatch
+        /// </summary>
+        public ReportError ArgumentCountMismatch { get; set; } =
+            new ReportError(11, "ERROR (11): missing, or extra arguments found");
+
+        /// <summary>
         /// Remap all void-return methods so they act as though
         /// they return this value. (set to non-void for utility console app)
         /// </summary>

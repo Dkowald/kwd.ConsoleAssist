@@ -122,7 +122,8 @@ namespace kwd.ConsoleAssist.Engine.Generator
             var sortedOps = ops.Select(x => new
             {
                 Op = x,
-                Count = x.GetParameters().Count(p => p.ParameterType != typeof(CancellationToken))
+                Count = x.GetParameters()
+                    .Count(p => p.ParameterType != typeof(CancellationToken))
             }).OrderByDescending(x => x.Count).ToArray();
 
             var asyncMethod = sortedOps.Any(x => x.Op.ReturnType.IsTask());
@@ -135,17 +136,19 @@ namespace kwd.ConsoleAssist.Engine.Generator
 
             switcher = switcher.Append(Gen.DefaultSwitchSection(new[]
             {
-                ThrowExtraArguments()
+                ReturnExtraArguments(asyncMethod)
             }));
 
             switcher = new[]
             {
-                Gen.SwitchStatement(Gen.MemberAccessExpression("args", "Count"), switcher)
+                Gen.SwitchStatement(
+                    Gen.MemberAccessExpression("args", "Count"), switcher)
             };
 
             var result = (MethodDeclarationSyntax) Gen.MethodDeclaration(name,
                 accessibility: Accessibility.Public,
-                modifiers: asyncMethod? DeclarationModifiers.Async : DeclarationModifiers.None,
+                modifiers: asyncMethod? DeclarationModifiers.Async 
+                            : DeclarationModifiers.None,
                 parameters: OpArgs(),
                 returnType: _ctx.TypeRef<Task<int?>>(),
                 statements: switcher);
@@ -222,7 +225,7 @@ namespace kwd.ConsoleAssist.Engine.Generator
                     }));
             else
                 switches = switches.Append(
-                    Gen.DefaultSwitchSection(ThrowExtraArguments())
+                    Gen.DefaultSwitchSection(ReturnUnknownArgument(false))
                     );
 
             var switcher = Gen.SwitchStatement(
@@ -334,10 +337,20 @@ namespace kwd.ConsoleAssist.Engine.Generator
 
         }
 
-        private SyntaxNode ThrowExtraArguments() =>
-            Gen.ThrowStatement(Gen.ObjectCreationExpression(
-                Gen.IdentifierName(nameof(Exception)),
-                Gen.LiteralExpression("Extra arguments found")
-            ));
+        private SyntaxNode ReturnExtraArguments(bool isAsync)
+        {
+            var code = Gen.LiteralExpression(
+                _ctx.Settings.ArgumentCountMismatch.Code);
+
+            return Gen.ReturnStatement(isAsync? code: Gen.TaskReturn(code));
+        }
+            
+        private SyntaxNode ReturnUnknownArgument(bool isAsync)
+        {
+            var code = Gen.LiteralExpression(
+                _ctx.Settings.UnknownCommand.Code);
+
+            return Gen.ReturnStatement(isAsync? code: Gen.TaskReturn(code));
+        }
     }
 }

@@ -82,6 +82,9 @@ namespace kwd.ConsoleAssist.Engine
                 if (result.HasValue)
                 {
                     Environment.ExitCode = result.Value;
+
+                    ReportProblem(result.Value);
+
                     _life.StopApplication();
                     break;
                 }
@@ -114,6 +117,21 @@ namespace kwd.ConsoleAssist.Engine
                 .ToArray();
 
             return input;
+        }
+
+        private void ReportProblem(int exitCode)
+        {
+            if (exitCode == _wrapper.Settings.ArgumentCountMismatch.Code &&
+                _wrapper.Settings.ArgumentCountMismatch.Message != "")
+            {
+                _con.Error.WriteLine(
+                    _wrapper.Settings.ArgumentCountMismatch.Message);
+            }
+                
+            if (exitCode == _wrapper.Settings.UnknownCommand.Code &&
+                _wrapper.Settings.UnknownCommand.Message != "")
+                _con.Error.WriteLine(
+                    _wrapper.Settings.UnknownCommand.Message);
         }
     }
 }

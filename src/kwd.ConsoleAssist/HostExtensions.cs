@@ -1,4 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+
 using kwd.ConsoleAssist.BasicConsole;
 using kwd.ConsoleAssist.Configuration;
 using kwd.ConsoleAssist.Engine;
@@ -40,5 +44,47 @@ namespace kwd.ConsoleAssist
             this IConfigurationBuilder configurationBuilder,
             string[] args, IDictionary<string, string> switchMappings)
             => configurationBuilder.Add(new UpdatableCommandLineSource(args, switchMappings));
+
+        /// <summary>
+        /// Run console with common exception handling
+        /// </summary>
+        public static async Task RunConsoleAsync(
+            this IHostBuilder builder,
+            ReportError operationCanceled,
+            CancellationToken cancel = default)
+        {
+            try
+            {
+                await builder.RunConsoleAsync(cancel);
+            }
+            catch (OperationCanceledException)
+            {
+                Environment.ExitCode = operationCanceled.Code;
+                if(operationCanceled.Message != "")
+                    Console.WriteLine(operationCanceled.Message);
+            }
+        }
+
+        /// <summary>
+        /// Run the console; friendlier ctl-c handler
+        /// </summary>
+        public static async Task RunConsoleAsync(
+            this HostBuilder builder,
+            Action<ConsoleLifetimeOptions> configureOptions,
+            ReportError operationCanceled,
+            CancellationToken cancel = default)
+        {
+            try
+            {
+                await builder.RunConsoleAsync(configureOptions, cancel);
+            }
+            catch (OperationCanceledException)
+            {
+                Environment.ExitCode = operationCanceled.Code;
+
+                if (operationCanceled.Message != "")
+                    Console.WriteLine(operationCanceled.Message);
+            }
+        }
     }
 }

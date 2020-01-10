@@ -61,7 +61,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     _model.Run();
                     return Task.FromResult<int?>(null);
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -74,7 +74,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     _model.Action1();
                     return Task.FromResult<int?>(null);
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -87,7 +87,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     _model.Action2(args.ElementAt(0));
                     return Task.FromResult<int?>(null);
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -100,7 +100,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     _model.ActionWithCancel(cancel);
                     return Task.FromResult<int?>(null);
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -112,7 +112,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     cancel.ThrowIfCancellationRequested();
                     return Task.FromResult<int?>(_model.ActionWithInt());
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -124,7 +124,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     cancel.ThrowIfCancellationRequested();
                     return Task.FromResult<int?>(_model.ActionWithOptionalInt());
                 default:
-                    throw new Exception("Extra arguments found");
+                    return Task.FromResult<int?>(11);
             }
         }
 
@@ -200,7 +200,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                         _model.Run();
                         return Task.FromResult<int?>(null);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(11);
                 }
             }
 
@@ -220,7 +220,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                         _model.Foo(args.ElementAt(0));
                         return null;
                     default:
-                        throw new Exception("Extra arguments found");
+                        return 11;
                 }
             }
         }
@@ -258,7 +258,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                         await _model.Run();
                         return null;
                     default:
-                        throw new Exception("Extra arguments found");
+                        return 11;
                 }
             }
 
@@ -270,7 +270,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                         await _model.Action1(args.ElementAt(0), cancel);
                         return null;
                     default:
-                        throw new Exception("Extra arguments found");
+                        return 11;
                 }
             }
 
@@ -284,7 +284,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     case 0:
                         return await _model.ActionWithOptionalIntReturn();
                     default:
-                        throw new Exception("Extra arguments found");
+                        return 11;
                 }
             }
 
@@ -324,7 +324,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                             _model.Run();
                             return Task.FromResult<int?>(null);
                         default:
-                            throw new Exception("Extra arguments found");
+                            return Task.FromResult<int?>(11);
                     }
                 }
 
@@ -344,7 +344,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                             _model.Foo(args.ElementAt(0));
                             return null;
                         default:
-                            throw new Exception("Extra arguments found");
+                            return 11;
                     }
                 }
             }
@@ -376,7 +376,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     case 0:
                         return await _model.Run(cancel);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return 11;
                 }
             }
         }
@@ -412,7 +412,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                         _model.Run();
                         return null;
                     default:
-                        throw new Exception("Extra arguments found");
+                        return 11;
                 }
             }
         }
@@ -434,7 +434,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                     case "foo":
                         return Foo(args.Slice(1), cancel);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(10);
                 }
             }
 
@@ -447,7 +447,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                         _model.Foo(args.ElementAt(0));
                         return Task.FromResult<int?>(null);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(11);
                 }
             }
         }
@@ -480,7 +480,7 @@ namespace kwd.ConsoleAssist.Tests.TestHelpers
                         _model.Run();
                         return Task.FromResult<int?>(null);
                     default:
-                        throw new Exception("Extra arguments found");
+                        return Task.FromResult<int?>(11);
                 }
             }
         }

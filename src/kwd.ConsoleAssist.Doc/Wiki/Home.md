@@ -44,6 +44,12 @@ But since .NET configuration also uses appsettings.json,
   and environment variables; 
 work-around this verbosity by using an environment variable.
 
+### Build error when changing model.
+While developing if you change the application model,
+the generated wrapper source may become un-compilable.
+
+Simply delete the generated file. It will get re-generated on teh next debug run.
+
 ### Cannot have Run with arguments if there are other commands
 
 Consider

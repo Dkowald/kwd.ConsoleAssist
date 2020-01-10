@@ -19,7 +19,7 @@ namespace kwd.ConsoleAssist.Demo
 
             //Create generic host.
             var host = Host.CreateDefaultBuilder();
-
+            
             //Use Updatable command line source.
             host.ConfigureAppConfiguration(x =>
                 x.AddUpdatableCommandLine(args, new Dictionary<string, string>
@@ -55,18 +55,10 @@ namespace kwd.ConsoleAssist.Demo
                 svc.AddHttpClient();
             });
 
-            try
-            {
-                //Run as console.
-                await host.RunConsoleAsync();
-            }
-            catch (OperationCanceledException)
-            {
-                /*eat ctl-c*/
-                Environment.ExitCode = 130;
-            }
+            await host.RunConsoleAsync(
+                new ReportError(130, "User termination (130)"));
         }
-
+        
         private static CommandLineWrapper CreateWrapper()
         {
             var settings = new EngineSettings(typeof(MyApp),
