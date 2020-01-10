@@ -105,8 +105,8 @@ namespace kwd.ConsoleAssist.BasicConsole
                         break;
                     }
 
-                    //ignores press with modifier key
-                    if (key.Modifiers == 0 && !char.IsControl(key.KeyChar))
+                    //ignores control key
+                    if (!char.IsControl(key.KeyChar))
                     {
                         data.Append(key.KeyChar);
 
