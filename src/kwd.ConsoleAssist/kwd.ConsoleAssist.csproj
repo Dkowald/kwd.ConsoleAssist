@@ -8,7 +8,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <Authors>Derek Kowald</Authors>
-    <Version>1.0.0-alpha-1</Version>
+    <Version>1.0.1-alpha-1</Version>
     <Title>KWD .NET Console project assistant</Title>
     <Product>KWD ConsoleAssist</Product>
     <Description>.NET library to ease development of console applications.</Description>
@@ -18,7 +18,11 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Tags>.NET Core;Console</Tags>
     <PackageIcon>icon.png</PackageIcon>
-    <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+    <PackageReleaseNotes>
+      Error code return for invalid input parameters.
+
+      Various bug fix.
+    </PackageReleaseNotes>
     <PackageTags>Console;Generic Host</PackageTags>
   </PropertyGroup>
 
