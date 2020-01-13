@@ -1,0 +1,3 @@
+[submodule "src/kwd.ConsoleAssist.Doc/Wiki"]
+	path = src/kwd.ConsoleAssist.Doc/Wiki
+	url = https://github.com/Dkowald/kwd.ConsoleAssist.wiki.git
